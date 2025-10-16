@@ -25,29 +25,29 @@ The application follows a **Layered Architecture** with **Ports & Adapters** pat
 ```mermaid
 graph TB
     subgraph "UI Layer"
-        UI[JavaFX Controllers]
+        UI["JavaFX Controllers"]
     end
     
     subgraph "Application Layer"
-        APP[Use Cases<br/>PlanWeek, AddTask]
+        APP["Use Cases<br/>PlanWeek, AddTask"]
     end
     
     subgraph "Domain Layer"
         subgraph "Model"
-            DOMAIN_MODEL[Task<br/>Value Objects]
+            DOMAIN_MODEL["Task<br/>Value Objects"]
         end
         subgraph "Ports"
-            TASK_REPO[TaskRepository<br/>Interface]
+            TASK_REPO["TaskRepository<br/>Interface"]
         end
     end
     
     subgraph "Infrastructure Layer"
         subgraph "Persistence"
-            TASK_ENTITY[TaskEntity]
-            TASK_MAPPER[TaskMapper<br/>Task ↔ TaskEntity]
-            REPO_IMPL[TaskRepositoryImpl<br/>implements TaskRepository]
-            DAO[DAO (ORMLite)]
-            DB[(SQLite Database)]
+            TASK_ENTITY["TaskEntity"]
+            TASK_MAPPER["TaskMapper<br/>Task ↔ TaskEntity"]
+            REPO_IMPL["TaskRepositoryImpl<br/>implements TaskRepository"]
+            DAO["DAO (ORMLite)"]
+            DB[("SQLite Database")]
         end
     end
     
@@ -107,25 +107,12 @@ The application has demonstrated a working flow from the UI → Application → 
 - **Language:** Java 11
 - **UI:** JavaFX
 - **ORM:** ORMLite
-- **Database:** SQLite (Docker optional)
+- **Database:** SQLite
 - **Build Tool:** Maven
 - **Architecture:** Layered architecture with domain-driven design principles
+- **Future:** Docker
 
 ---
-
-## 📚 How to Run
-
-```bash
-# Clone repository
-git clone https://github.com/giabaobui/weekly-planner.git
-cd weekly-planner
-
-# Build
-mvn clean install
-
-# Run
-mvn javafx:run
-```
 
 ---
 
