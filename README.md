@@ -80,11 +80,11 @@ graph TB
 
 ## Key Features
 
-- ✅ Task creation and management
-- ✅ Task prioritization and status tracking
-- ✅ Weekly planning algorithm
-- ✅ Clean architecture implementation
-- ✅ Repository pattern with ORM integration
+- Task creation and management
+- Task prioritization and status tracking
+- Weekly planning algorithm
+- Clean architecture implementation
+- Repository pattern with ORM integration
 
 ---
 
@@ -102,7 +102,7 @@ The application has demonstrated a working flow from the UI → Application → 
 
 ---
 
-## 🧰 Tech Stack
+## Tech Stack
 
 - **Language:** Java 11
 - **UI:** JavaFX
