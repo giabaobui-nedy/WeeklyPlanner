@@ -5,10 +5,8 @@ import java.sql.SQLException;
 
 public final class DatabaseConfigurator {
     private static final String ENV = "DB_URL";
-    private static final String DEFAULT_URL = "jdbc:sqlite:planner.db";
-    private static final String PREFIX = "jdbc:sqlite:";
+    private static final String DEFAULT_URL = "jdbc:sqlite:planner-database";
     private static volatile JdbcConnectionSource connectionSource;
-    private static final Object LOCK = new Object();
 
     private DatabaseConfigurator() {}
 
