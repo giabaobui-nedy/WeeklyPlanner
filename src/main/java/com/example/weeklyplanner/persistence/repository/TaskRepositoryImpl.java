@@ -48,21 +48,22 @@ public class TaskRepositoryImpl implements TaskRepository {
 
     @Override
     public Task getOne(Integer id) throws SQLException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getOne'");
+        try {
+            TaskEntity taskEntity = taskDao.queryForId(id);
+            return new TaskMapper().convertEntityToDomain(taskEntity);
+        } catch (SQLException e) {
+            throw e;
+        }
     }
 
     @Override
     public Task add(Task entity) throws SQLException {
-        TaskEntity taskEntity = new TaskEntity();
-        taskEntity.name = entity.getName();
-        taskEntity.description = entity.getDescription();
-        taskEntity.status = entity.getStatus().toString();
-        taskEntity.priority = entity.getPriority().toString();
-        taskEntity.category = entity.getCategory();
-        taskEntity.dueDate = entity.getDueDate().toString();
-        taskEntity.durationMinutes = entity.getDurationMinutes();
-        taskDao.create(taskEntity);
-        return new TaskMapper().convertEntityToDomain(taskEntity);
-    }
+        TaskEntity taskEntity = new TaskMapper().convertDomainToEntity(entity);
+        try {
+            taskDao.create(taskEntity);
+            return new TaskMapper().convertEntityToDomain(taskEntity);
+        } catch (SQLException e) {
+            throw e;
+        }
+    } 
 }

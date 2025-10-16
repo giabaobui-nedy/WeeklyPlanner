@@ -1,35 +1,77 @@
 package com.example.weeklyplanner.persistence.entity;
 
 import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "task")
 public class TaskEntity {
 
     @DatabaseField(generatedId = true)
-    public Integer id;
+    private Integer id;
 
     @DatabaseField(canBeNull = false, index = true)
-    public String name;
+    private String name;
 
     @DatabaseField
-    public String description;
-
-    @DatabaseField(dataType = DataType.ENUM_STRING, index = true)
-    public String status;
-
-    @DatabaseField(dataType = DataType.ENUM_STRING, index = true)
-    public String priority;
+    private String description;
 
     @DatabaseField(index = true)
-    public String category;
+    private String status;
+
+    @DatabaseField(index = true)
+    private String priority;
+
+    @DatabaseField(index = true)
+    private String category;
 
     @DatabaseField
-    public String dueDate; // ISO yyyy-MM-dd (keep TEXT for SQLite friendliness)
+    private String dueDate; // ISO yyyy-MM-dd (keep TEXT for SQLite friendliness)
 
     @DatabaseField
-    public Integer durationMinutes;
+    private Integer durationMinutes;
 
-    public TaskEntity() {}
+    public TaskEntity(Integer id, String name, String description, String status, String priority, String category, String dueDate, Integer durationMinutes) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.status = status;
+        this.priority = priority;
+        this.category = category;
+        this.dueDate = dueDate;
+        this.durationMinutes = durationMinutes;
+    }
+
+    TaskEntity() {}
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public String getPriority() {
+        return priority;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public String getDueDate() {
+        return dueDate;
+    }
+
+    public Integer getDurationMinutes() {
+        return durationMinutes;
+    }
 }

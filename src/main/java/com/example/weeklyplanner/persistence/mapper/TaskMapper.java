@@ -6,6 +6,7 @@ import com.example.weeklyplanner.domain.model.Task;
 import com.example.weeklyplanner.persistence.entity.TaskEntity;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,13 +24,29 @@ public class TaskMapper implements BaseMapper<TaskEntity, Task> {
     @Override
     public Task convertEntityToDomain(TaskEntity taskEntity) {
         return new Task(
-                taskEntity.id,
-                taskEntity.name,
-                taskEntity.description,
-                TaskStatus.valueOf(taskEntity.status),
-                TaskPriority.valueOf(taskEntity.priority),
-                taskEntity.category,
-                LocalDate.parse(taskEntity.dueDate),
-                taskEntity.durationMinutes);
+                taskEntity.getId(),
+                taskEntity.getName(),
+                taskEntity.getDescription(),
+                TaskStatus.valueOf(taskEntity.getStatus()),
+                TaskPriority.valueOf(taskEntity.getPriority()),
+                taskEntity.getCategory(),
+                LocalDate.parse(taskEntity.getDueDate()),
+                taskEntity.getDurationMinutes());
+    }
+
+    @Override
+    public TaskEntity convertDomainToEntity(Task domain) {
+        return new TaskEntity(domain.getId(), domain.getName(), domain.getDescription(), domain.getStatus().toString(),
+                domain.getPriority().toString(), domain.getCategory(),
+                domain.getDueDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")), domain.getDurationMinutes());
+    }
+
+    @Override
+    public List<TaskEntity> convertDomainListToEntityList(List<Task> domains) {
+        List<TaskEntity> taskEntityList = new ArrayList<>();
+        for (Task domain : domains) {
+            taskEntityList.add(convertDomainToEntity(domain));
+        }
+        return taskEntityList;
     }
 }
