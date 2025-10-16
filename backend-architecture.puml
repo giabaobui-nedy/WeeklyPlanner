@@ -1,4 +1,4 @@
-@startuml backend-architecture
+@startuml
 title Weekly Planner – Layered (Ports & Adapters)
 
 package "app/ui" {
@@ -26,7 +26,7 @@ package "infrastructure : persistence" {
         [TaskMapper\n(Task <-> TaskEntity)] as TASK_MAPPER
     }
     package impl {
-        [OrmLiteTaskRepository\nimplements TaskRepository] as REPO_IMPL
+        [TaskRepositoryImpl\nimplements TaskRepository] as REPO_IMPL
     }
     [DAO (ORMLite)]
     database DB
