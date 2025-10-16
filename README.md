@@ -53,7 +53,7 @@ graph TB
     
     UI --> APP
     APP --> TASK_REPO
-    TASK_REPO <|.. REPO_IMPL
+    TASK_REPO -.-> REPO_IMPL
     REPO_IMPL --> DAO
     DAO --> DB
     REPO_IMPL --> TASK_MAPPER

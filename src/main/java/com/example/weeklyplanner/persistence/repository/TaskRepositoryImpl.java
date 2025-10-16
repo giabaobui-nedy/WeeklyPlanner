@@ -1,7 +1,7 @@
 package com.example.weeklyplanner.persistence.repository;
 
 import com.example.weeklyplanner.domain.model.Task;
-import com.example.weeklyplanner.domain.repository.TaskRepository;
+import com.example.weeklyplanner.domain.port.TaskRepository;
 import com.example.weeklyplanner.persistence.db.DatabaseConfigurator;
 import com.example.weeklyplanner.persistence.entity.TaskEntity;
 import com.example.weeklyplanner.persistence.mapper.TaskMapper;

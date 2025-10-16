@@ -6,12 +6,11 @@ import java.time.LocalDate;
 import com.example.weeklyplanner.domain.enumeration.TaskPriority;
 import com.example.weeklyplanner.domain.enumeration.TaskStatus;
 import com.example.weeklyplanner.domain.model.Task;
-import com.example.weeklyplanner.domain.repository.TaskRepository;
 import com.example.weeklyplanner.persistence.repository.TaskRepositoryImpl;
 import org.junit.Test;
 
 public class DatabaseTest {
-    private final TaskRepository taskRepository = new TaskRepositoryImpl();
+    private final TaskRepositoryImpl taskRepository = new TaskRepositoryImpl();
 
     @Test
     public void testAddTask() throws SQLException {
