@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.weeklyplanner.ui.controller.AddTaskController"
+            prefWidth="520" prefHeight="380">
+    <center>
+        <GridPane hgap="12" vgap="12">
+            <columnConstraints>
+                <ColumnConstraints halignment="RIGHT" minWidth="120"/>
+                <ColumnConstraints hgrow="ALWAYS"/>
+            </columnConstraints>
+
+            <!-- Title -->
+            <Label text="Title:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+            <TextField fx:id="titleField" promptText="e.g., Finish COS40003 report"
+                       GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+            <!-- Description -->
+            <Label text="Description:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+            <TextArea fx:id="descArea" promptText="Optional details"
+                      prefRowCount="3"
+                      GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+            <!-- Due Date -->
+            <Label text="Due date:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+            <DatePicker fx:id="dueDatePicker" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+            <!-- Priority -->
+            <Label text="Priority:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+            <ComboBox fx:id="priorityBox" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+            <!-- Status -->
+            <Label text="Status:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+            <ComboBox fx:id="statusBox" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+            <!-- Estimated Minutes -->
+            <Label text="Estimate (min):" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+            <TextField fx:id="estimateField" promptText="e.g., 90"
+                       GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+
+            <!-- Error label -->
+            <Label fx:id="errorLabel" textFill="red"
+                   GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+
+            <!-- Buttons -->
+            <HBox spacing="8" alignment="CENTER_RIGHT"
+                  GridPane.rowIndex="7" GridPane.columnIndex="1">
+                <Button fx:id="cancelBtn" text="Cancel" />
+                <Button fx:id="saveBtn"   text="Save"   />
+            </HBox>
+        </GridPane>
+    </center>
+</BorderPane>

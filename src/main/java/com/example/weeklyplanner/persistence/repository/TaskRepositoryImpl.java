@@ -59,11 +59,7 @@ public class TaskRepositoryImpl implements TaskRepository {
     @Override
     public Task add(Task entity) throws SQLException {
         TaskEntity taskEntity = new TaskMapper().convertDomainToEntity(entity);
-        try {
-            taskDao.create(taskEntity);
-            return new TaskMapper().convertEntityToDomain(taskEntity);
-        } catch (SQLException e) {
-            throw e;
-        }
+        taskDao.create(taskEntity);
+        return new TaskMapper().convertEntityToDomain(taskEntity);
     } 
 }

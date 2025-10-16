@@ -1,0 +1,53 @@
+@startuml backend-architecture
+title Weekly Planner – Layered (Ports & Adapters)
+
+package "app/ui" {
+    [JavaFX Controllers] as UI
+}
+
+package application {
+    [Use Cases\n(PlanWeek, AddTask)] as APP
+}
+
+package domain {
+    package model {
+        [Task\nValue Objects] as DOMAIN_MODEL
+    }
+    package port {
+        interface TaskRepository
+    }
+}
+
+package "infrastructure : persistence" {
+    package entity {
+        [TaskEntity]
+    }
+    package mapper {
+        [TaskMapper\n(Task <-> TaskEntity)] as TASK_MAPPER
+    }
+    package impl {
+        [OrmLiteTaskRepository\nimplements TaskRepository] as REPO_IMPL
+    }
+    [DAO (ORMLite)]
+    database DB
+}
+
+UI --> APP : calls use-cases
+APP --> TaskRepository : depends on port
+TaskRepository <|.. REPO_IMPL
+REPO_IMPL --> [DAO (ORMLite)]
+[DAO (ORMLite)] --> DB
+REPO_IMPL --> TASK_MAPPER
+TASK_MAPPER --> DOMAIN_MODEL
+TASK_MAPPER --> [TaskEntity]
+
+note left of domain
+    Inner (lowest) layer.
+    No framework dependencies.
+end note
+
+note right of REPO_IMPL
+    Outer adapter implements the port.
+    OK to import domain types.
+end note
+@enduml

@@ -36,9 +36,15 @@ public class TaskMapper implements BaseMapper<TaskEntity, Task> {
 
     @Override
     public TaskEntity convertDomainToEntity(Task domain) {
-        return new TaskEntity(domain.getId(), domain.getName(), domain.getDescription(), domain.getStatus().toString(),
-                domain.getPriority().toString(), domain.getCategory(),
-                domain.getDueDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")), domain.getDurationMinutes());
+        return new TaskEntity(
+                domain.getId(),
+                domain.getName(),
+                domain.getDescription(),
+                domain.getStatus().name(),
+                domain.getPriority().name(),
+                domain.getCategory(),
+                domain.getDueDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),
+                domain.getDurationMinutes());
     }
 
     @Override

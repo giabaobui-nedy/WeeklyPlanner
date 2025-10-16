@@ -9,6 +9,7 @@ module com.example.weeklyplanner {
     // 👇 ORMLite needs reflective access to your entities
     opens com.example.weeklyplanner.persistence.entity to ormlite.jdbc;
     opens com.example.weeklyplanner to javafx.fxml;
+    opens com.example.weeklyplanner.ui.controller to javafx.fxml;
     opens com.example.weeklyplanner.test.persistence.db to junit;
     exports com.example.weeklyplanner;
 }

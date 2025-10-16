@@ -8,11 +8,11 @@ import com.example.weeklyplanner.domain.model.Task;
 public class AddTaskService {
     private final TaskRepository taskRepository = new TaskRepositoryImpl();
 
-    public void addTask(Task task) {
+    public Task addTask(Task task) {
         try {
-            taskRepository.add(task);
+            return taskRepository.add(task);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Failed to add task: " + e.getMessage());
         }
     }
 }
