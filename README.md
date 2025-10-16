@@ -78,6 +78,12 @@ graph TB
 
 ---
 
+## UI Design (For easier layout creation)
+
+**UI/UX Design:** [Figma Design Link](https://www.figma.com/design/uctfbOuwrb6pDweWiQjaAN/Weekly-Planner?node-id=0-1&t=Hz5tYzjscCOHr4oB-1)
+
+---
+
 ## Key Features
 
 - Task creation and management
