@@ -6,16 +6,6 @@ import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "task")
 public class TaskEntity {
-    public enum Status {
-        TODO,
-        IN_PROGRESS,
-        DONE
-    }
-    public enum Priority {
-        LOW,
-        MEDIUM,
-        HIGH
-    }
 
     @DatabaseField(generatedId = true)
     public Integer id;
@@ -27,10 +17,10 @@ public class TaskEntity {
     public String description;
 
     @DatabaseField(dataType = DataType.ENUM_STRING, index = true)
-    public Status status;
+    public String status;
 
     @DatabaseField(dataType = DataType.ENUM_STRING, index = true)
-    public Priority priority;
+    public String priority;
 
     @DatabaseField(index = true)
     public String category;
