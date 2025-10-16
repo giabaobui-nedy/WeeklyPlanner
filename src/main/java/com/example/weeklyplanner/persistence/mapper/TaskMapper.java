@@ -1,4 +1,4 @@
-package com.example.weeklyplanner.domain.mapper;
+package com.example.weeklyplanner.persistence.mapper;
 
 
 import com.example.weeklyplanner.domain.model.Task;
