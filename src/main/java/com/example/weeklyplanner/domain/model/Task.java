@@ -30,4 +30,35 @@ public class Task {
         this.durationMinutes = durationMinutes;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public TaskStatus getStatus() {
+        return status;
+    }
+
+    public TaskPriority getPriority() {
+        return priority;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public LocalDate getDueDate() {
+        return dueDate;
+    }
+
+    public Integer getDurationMinutes() {
+        return durationMinutes;
+    }
 }

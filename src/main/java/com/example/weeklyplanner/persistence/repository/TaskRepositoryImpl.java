@@ -10,7 +10,6 @@ import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.stmt.QueryBuilder;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class TaskRepositoryImpl implements TaskRepository {
@@ -25,7 +24,7 @@ public class TaskRepositoryImpl implements TaskRepository {
     }
 
     @Override
-    public List<Task> getAll() {
+    public List<Task> getAll() throws SQLException {
         QueryBuilder<TaskEntity, Integer> queryBuilder = taskDao.queryBuilder();
         queryBuilder.orderBy("id", false);
         try {
@@ -38,24 +37,32 @@ public class TaskRepositoryImpl implements TaskRepository {
     }
 
     @Override
-    public Task update(Task entity) {
+    public Task update(Task entity) throws SQLException {
         return null;
     }
 
     @Override
-    public Task delete(Integer id) {
+    public Task delete(Integer id) throws SQLException {
         return null;
     }
 
     @Override
-    public Task getOne(Integer id) {
+    public Task getOne(Integer id) throws SQLException {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getOne'");
     }
 
     @Override
-    public Task add(Task entity) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'add'");
+    public Task add(Task entity) throws SQLException {
+        TaskEntity taskEntity = new TaskEntity();
+        taskEntity.name = entity.getName();
+        taskEntity.description = entity.getDescription();
+        taskEntity.status = entity.getStatus().toString();
+        taskEntity.priority = entity.getPriority().toString();
+        taskEntity.category = entity.getCategory();
+        taskEntity.dueDate = entity.getDueDate().toString();
+        taskEntity.durationMinutes = entity.getDurationMinutes();
+        taskDao.create(taskEntity);
+        return new TaskMapper().convertEntityToDomain(taskEntity);
     }
 }
