@@ -7,6 +7,9 @@ import com.example.weeklyplanner.domain.port.TaskRepository;
 import com.example.weeklyplanner.persistence.repository.TaskRepositoryImpl;
 
 public class ViewBacklogService {
+    /**
+     * COMPLETE
+     */
     private Backlog backlog;
     private final TaskRepository taskRepository = new TaskRepositoryImpl();
 
