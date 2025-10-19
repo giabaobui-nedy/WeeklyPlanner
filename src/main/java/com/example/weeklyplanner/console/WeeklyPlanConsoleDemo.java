@@ -36,7 +36,19 @@ public final class WeeklyPlanConsoleDemo {
                 new Task(1003, "Team sync", "Discuss blockers", TaskStatus.TODO, TaskPriority.MEDIUM, "Meetings",
                         LocalDate.now().plusDays(3), 60),
                 new Task(1004, "Write documentation", "Capture planner decisions", TaskStatus.TODO, TaskPriority.MEDIUM,
-                        "Documentation", LocalDate.now().plusDays(4), 90));
+                        "Documentation", LocalDate.now().plusDays(4), 90),
+                new Task(1005, "Test task", "Test task description", TaskStatus.TODO, TaskPriority.MEDIUM, "Work",
+                        LocalDate.now().plusDays(5), 60),
+                new Task(1006, "Test task 2", "Test task 2 description", TaskStatus.TODO, TaskPriority.MEDIUM, "Work",
+                        LocalDate.now().plusDays(6), 60),
+                new Task(1007, "Test task 3", "Test task 3 description", TaskStatus.TODO, TaskPriority.MEDIUM, "Work",
+                        LocalDate.now().plusDays(7), 40),
+                new Task(1008, "Test task 4", "Test task 4 description", TaskStatus.TODO, TaskPriority.MEDIUM, "Work",
+                        LocalDate.now().plusDays(8), 60),
+                new Task(1009, "Test task 5", "Test task 5 description", TaskStatus.TODO, TaskPriority.MEDIUM, "Work",
+                        LocalDate.now().plusDays(9), 100),
+                new Task(1010, "Test task 6", "Test task 6 description", TaskStatus.TODO, TaskPriority.MEDIUM, "Work",
+                        LocalDate.now().plusDays(10), 120));
 
         Map<Integer, Task> tasksById = new HashMap<>();
         tasks.forEach(task -> tasksById.put(task.getId(), task));
