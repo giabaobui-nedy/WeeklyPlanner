@@ -3,12 +3,12 @@ title Weekly Planning – Domain & Services (MVP)
 
 /' ======= Domain Core ======= '/
 class Task {
-    +UUID id
-    +String title
+    +Integer id
+    +String name
     +String description
-    +Priority priority
-    +ZonedDateTime dueDate
-    +int durationInMinutes
+    +TaskPriority priority
+    +LocalDate dueDate
+    +Integer durationMinutes
 }
 
 class Backlog {
@@ -28,20 +28,20 @@ class UserPreference {
     +Break[] breaks // TODO: later
 }
 
-class IsoWeek {
+class ISOWeek {
     +Integer year
     +Integer week
 }
 
 class WeeklyPlan {
-    +IsoWeek isoWeek
+    +ISOWeek isoWeek
     +DayPlan[] dayPlans
 }
 
 class DayPlan {
     +Day day
-    +TaskEntry[] taskEntries
-    +Boolean addTaskEntry(TaskEntry taskEntry)
+    +PlanEntry[] taskEntries
+    +Boolean addTaskEntry(PlanEntry taskEntry)
 }
 
 
@@ -55,10 +55,10 @@ enum Day {
     SUNDAY
 }
 
-class TaskEntry {
-    +UUID id
-    +UUID taskId
-    +UUID dayPlanId
+class PlanEntry {
+    +Integer id
+    +Integer taskId
+    +Integer dayPlanId
     +Integer dayIndex  // 1..7
     +ZonedDateTime startAt
     +ZonedDateTime endAt
@@ -79,7 +79,7 @@ Planner --> Backlog: uses
 Planner --> UserPreference: uses
 Planner --> WeeklyPlan: creates
 WeeklyPlan *-- DayPlan: has many
-WeeklyPlan *-- IsoWeek: has one
-DayPlan *-- TaskEntry: has many
+WeeklyPlan *-- ISOWeek: has one
+DayPlan *-- PlanEntry: has many
 DayPlan *-- Day: has one
 @enduml
