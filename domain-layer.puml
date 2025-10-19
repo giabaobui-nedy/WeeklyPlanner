@@ -1,0 +1,85 @@
+@startuml
+title Weekly Planning – Domain & Services (MVP)
+
+/' ======= Domain Core ======= '/
+class Task {
+    +UUID id
+    +String title
+    +String description
+    +Priority priority
+    +ZonedDateTime dueDate
+    +int durationInMinutes
+}
+
+class Backlog {
+    + Task[] unplannedTasks
+}
+
+enum TaskPriority {
+    LOW
+    MEDIUM
+    HIGH
+}
+
+
+class UserPreference {
+    +LocalTime dayStart
+    +LocalTime dayEnd
+    +Break[] breaks // TODO: later
+}
+
+class IsoWeek {
+    +Integer year
+    +Integer week
+}
+
+class WeeklyPlan {
+    +IsoWeek isoWeek
+    +DayPlan[] dayPlans
+}
+
+class DayPlan {
+    +Day day
+    +TaskEntry[] taskEntries
+    +Boolean addTaskEntry(TaskEntry taskEntry)
+}
+
+
+enum Day {
+    MONDAY
+    TUESDAY
+    WEDNESDAY
+    THURSDAY
+    FRIDAY
+    SATURDAY
+    SUNDAY
+}
+
+class TaskEntry {
+    +UUID id
+    +UUID taskId
+    +UUID dayPlanId
+    +Integer dayIndex  // 1..7
+    +ZonedDateTime startAt
+    +ZonedDateTime endAt
+}
+
+class SimpleWeeklyPlanner implements Planner {
+    +WeeklyPlan plan(Backlog backlog, UserPreference userPreference)
+}
+
+
+interface Planner {
+    +WeeklyPlan plan(Backlog backlog, UserPreference userPreference)
+}
+
+'/ ======= Relationships in the domain layer ======= '/
+Task *-- TaskPriority: assumes a
+Planner --> Backlog: uses
+Planner --> UserPreference: uses
+Planner --> WeeklyPlan: creates
+WeeklyPlan *-- DayPlan: has many
+WeeklyPlan *-- IsoWeek: has one
+DayPlan *-- TaskEntry: has many
+DayPlan *-- Day: has one
+@enduml
