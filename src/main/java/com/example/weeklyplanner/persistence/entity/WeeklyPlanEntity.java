@@ -3,32 +3,29 @@ package com.example.weeklyplanner.persistence.entity;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
-@DatabaseTable(tableName = "plan_entry")
-public class PlanEntryEntity {
+@DatabaseTable(tableName = "weekly_plan")
+public class WeeklyPlanEntity {
     @DatabaseField(generatedId = true)
     private Integer id;
 
-    @DatabaseField(canBeNull = false, index = true, foreign = true)
-    private TaskEntity task;
+    @DatabaseField(canBeNull = false, index = true)
+    private Integer year;
 
     @DatabaseField(canBeNull = false, index = true)
-    private WeeklyPlanEntity plan;
+    private Integer week;
 
     @DatabaseField(canBeNull = false, index = true)
-    private Integer dayIndex;
+    private String version;
 
     @DatabaseField(canBeNull = false, index = true)
-    private Integer durationMinutes;
+    private String requestId;
 
     @DatabaseField(canBeNull = false, index = true)
-    private Integer startHour;
+    private String userPreference;
 
     @DatabaseField(canBeNull = false, index = true)
-    private Integer startMinute;
+    private String createdAt;
 
     @DatabaseField(canBeNull = false, index = true)
-    private Integer endHour;
-
-    @DatabaseField(canBeNull = false, index = true)
-    private Integer endMinute;
+    private String updatedAt;
 }
