@@ -1,5 +1,6 @@
 package com.example.weeklyplanner.persistence.repository;
 
+import com.example.weeklyplanner.domain.enumeration.TaskStatus;
 import com.example.weeklyplanner.domain.model.Task;
 import com.example.weeklyplanner.domain.port.TaskRepository;
 import com.example.weeklyplanner.persistence.db.DatabaseConfigurator;
@@ -37,6 +38,19 @@ public class TaskRepositoryImpl implements TaskRepository {
     }
 
     @Override
+    public List<Task> getTasksByStatus(TaskStatus status) throws SQLException {
+        QueryBuilder<TaskEntity, Integer> queryBuilder = taskDao.queryBuilder();
+        queryBuilder.where().eq("status", status.name());
+        try {
+            List<TaskEntity> rows = queryBuilder.query();
+            TaskMapper taskMapper = new TaskMapper();
+            return taskMapper.convertEntityListToDomainList(rows);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
     public Task update(Task entity) throws SQLException {
         return null;
     }
@@ -61,5 +75,5 @@ public class TaskRepositoryImpl implements TaskRepository {
         TaskEntity taskEntity = new TaskMapper().convertDomainToEntity(entity);
         taskDao.create(taskEntity);
         return new TaskMapper().convertEntityToDomain(taskEntity);
-    } 
+    }
 }
