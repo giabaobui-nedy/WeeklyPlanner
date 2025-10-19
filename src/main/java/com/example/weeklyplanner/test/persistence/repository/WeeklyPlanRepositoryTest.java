@@ -2,14 +2,11 @@ package com.example.weeklyplanner.test.persistence.repository;
 
 import com.example.weeklyplanner.domain.model.WeeklyPlan;
 import com.example.weeklyplanner.domain.model.DayPlan;
-import com.example.weeklyplanner.domain.model.ISOWeek;
 import com.example.weeklyplanner.persistence.repository.WeeklyPlanRepositoryImpl;
 import com.example.weeklyplanner.persistence.entity.UserPreferenceEntity;
-import com.example.weeklyplanner.persistence.db.DatabaseInitializer;
 import com.example.weeklyplanner.test.persistence.TestDataManager;
 
 import java.sql.SQLException;
-import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Before;

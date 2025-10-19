@@ -63,6 +63,7 @@ public class WeeklyPlanRepositoryImpl implements WeeklyPlanRepository {
     public WeeklyPlan add(WeeklyPlan entity) throws SQLException {
         try {
             WeeklyPlanEntity weeklyPlanEntity = new WeeklyPlanMapper().convertDomainToEntity(entity);
+            ensureUserPreference(weeklyPlanEntity);
             weeklyPlanDao.create(weeklyPlanEntity);
             return new WeeklyPlanMapper().convertEntityToDomain(weeklyPlanEntity);
         } catch (SQLException e) {
@@ -74,6 +75,7 @@ public class WeeklyPlanRepositoryImpl implements WeeklyPlanRepository {
     public WeeklyPlan update(WeeklyPlan entity) throws SQLException {
         try {
             WeeklyPlanEntity weeklyPlanEntity = new WeeklyPlanMapper().convertDomainToEntity(entity);
+            ensureUserPreference(weeklyPlanEntity);
             weeklyPlanDao.update(weeklyPlanEntity);
             return new WeeklyPlanMapper().convertEntityToDomain(weeklyPlanEntity);
         } catch (SQLException e) {
@@ -222,5 +224,23 @@ public class WeeklyPlanRepositoryImpl implements WeeklyPlanRepository {
         } catch (SQLException e) {
             throw e;
         }
+    }
+
+    private void ensureUserPreference(WeeklyPlanEntity weeklyPlanEntity) throws SQLException {
+        if (weeklyPlanEntity.getUserPreference() != null) {
+            return;
+        }
+        UserPreferenceEntity userPrefEntity = userPreferenceDao.queryForFirst();
+        if (userPrefEntity == null) {
+            userPrefEntity = new UserPreferenceEntity();
+            userPrefEntity.setDayStart("09:00");
+            userPrefEntity.setDayEnd("17:00");
+            String currentTime = java.time.LocalDateTime.now()
+                    .format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+            userPrefEntity.setCreatedAt(currentTime);
+            userPrefEntity.setUpdatedAt(currentTime);
+            userPreferenceDao.create(userPrefEntity);
+        }
+        weeklyPlanEntity.setUserPreference(userPrefEntity);
     }
 }
