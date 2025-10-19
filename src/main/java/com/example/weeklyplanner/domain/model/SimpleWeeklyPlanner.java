@@ -1,7 +1,5 @@
 package com.example.weeklyplanner.domain.model;
 
-import com.example.weeklyplanner.domain.enumeration.TaskPriority;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;

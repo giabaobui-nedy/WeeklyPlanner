@@ -1,10 +1,8 @@
 package com.example.weeklyplanner.test.persistence.db;
 
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.List;
 
-import com.example.weeklyplanner.domain.enumeration.TaskPriority;
 import com.example.weeklyplanner.domain.enumeration.TaskStatus;
 import com.example.weeklyplanner.domain.model.Task;
 import com.example.weeklyplanner.persistence.repository.TaskRepositoryImpl;
