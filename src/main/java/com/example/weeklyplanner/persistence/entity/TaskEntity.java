@@ -41,7 +41,7 @@ public class TaskEntity {
         this.durationMinutes = durationMinutes;
     }
 
-    TaskEntity() {}
+    public TaskEntity() {}
 
     public Integer getId() {
         return id;
