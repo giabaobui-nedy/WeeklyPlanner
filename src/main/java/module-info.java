@@ -11,5 +11,6 @@ module com.example.weeklyplanner {
     opens com.example.weeklyplanner to javafx.fxml;
     opens com.example.weeklyplanner.ui.controller to javafx.fxml;
     opens com.example.weeklyplanner.test.persistence.db to junit;
+    opens com.example.weeklyplanner.test.application to junit;
     exports com.example.weeklyplanner;
 }

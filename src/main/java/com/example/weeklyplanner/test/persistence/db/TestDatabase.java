@@ -12,14 +12,14 @@ import com.example.weeklyplanner.persistence.repository.TaskRepositoryImpl;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class DatabaseTest {
+public class TestDatabase {
     private final TaskRepositoryImpl taskRepository = new TaskRepositoryImpl();
 
     @Test
     public void testAddTask() throws SQLException {
-        Task task = new Task(null, "Test Task", "This is a test task", TaskStatus.TODO, TaskPriority.MEDIUM,
-                "Test Category", LocalDate.now(), 30);
-//        taskRepository.add(task);
+        // Task task = new Task(null, "Test Task", "This is a test task", TaskStatus.TODO, TaskPriority.MEDIUM,
+        //         "Test Category", LocalDate.now(), 30);
+        // taskRepository.add(task);
     }
 
     @Test

@@ -33,7 +33,7 @@ public class TaskRepositoryImpl implements TaskRepository {
             TaskMapper taskMapper = new TaskMapper();
             return taskMapper.convertEntityListToDomainList(rows);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw e;
         }
     }
 
@@ -46,7 +46,7 @@ public class TaskRepositoryImpl implements TaskRepository {
             TaskMapper taskMapper = new TaskMapper();
             return taskMapper.convertEntityListToDomainList(rows);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw e;
         }
     }
 
@@ -72,8 +72,12 @@ public class TaskRepositoryImpl implements TaskRepository {
 
     @Override
     public Task add(Task entity) throws SQLException {
-        TaskEntity taskEntity = new TaskMapper().convertDomainToEntity(entity);
-        taskDao.create(taskEntity);
-        return new TaskMapper().convertEntityToDomain(taskEntity);
+        try {
+            TaskEntity taskEntity = new TaskMapper().convertDomainToEntity(entity);
+            taskDao.create(taskEntity);
+            return new TaskMapper().convertEntityToDomain(taskEntity);
+        } catch (SQLException e) {
+            throw e;
+        }
     }
 }
