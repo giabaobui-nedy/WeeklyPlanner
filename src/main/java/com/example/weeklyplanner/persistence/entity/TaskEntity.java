@@ -25,7 +25,7 @@ public class TaskEntity {
     private String category;
 
     @DatabaseField
-    private String dueDate; // ISO yyyy-MM-dd (keep TEXT for SQLite friendliness)
+    private String dueDate; // Should be date time object. Format: yyyy-MM-dd HH:mm:ss
 
     @DatabaseField
     private Integer durationMinutes;

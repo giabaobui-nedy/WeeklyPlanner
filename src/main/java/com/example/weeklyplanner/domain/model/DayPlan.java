@@ -1,5 +1,5 @@
 package com.example.weeklyplanner.domain.model;
 
-public class TaskEntry {
-
+public class DayPlan {
+    
 }

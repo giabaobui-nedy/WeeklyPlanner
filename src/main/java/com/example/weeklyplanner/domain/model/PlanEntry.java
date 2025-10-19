@@ -1,5 +1,5 @@
 package com.example.weeklyplanner.domain.model;
 
-public class DayAllocation {
-    
+public class PlanEntry {
+
 }
