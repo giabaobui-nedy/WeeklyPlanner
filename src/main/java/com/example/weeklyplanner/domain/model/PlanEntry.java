@@ -1,23 +1,25 @@
 package com.example.weeklyplanner.domain.model;
 
-import java.time.ZonedDateTime;
+import java.time.LocalTime;
 
 public class PlanEntry {
     private final Integer id;
     private final Integer taskId;
     private final Integer dayPlanId;
     private final Integer dayIndex; // 1..7
-    private final ZonedDateTime startAt;
-    private final ZonedDateTime endAt;
+    private final LocalTime startTime;
+    private final LocalTime endTime;
+    private final Integer durationMinutes;
 
     public PlanEntry(Integer id, Integer taskId, Integer dayPlanId, Integer dayIndex, 
-                    ZonedDateTime startAt, ZonedDateTime endAt) {
+                    LocalTime startTime, LocalTime endTime) {
         this.id = id;
         this.taskId = taskId;
         this.dayPlanId = dayPlanId;
         this.dayIndex = dayIndex;
-        this.startAt = startAt;
-        this.endAt = endAt;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.durationMinutes = calculateDurationMinutes(startTime, endTime);
     }
 
     public Integer getId() {
@@ -36,11 +38,19 @@ public class PlanEntry {
         return dayIndex;
     }
 
-    public ZonedDateTime getStartAt() {
-        return startAt;
+    public LocalTime getStartTime() {
+        return startTime;
     }
 
-    public ZonedDateTime getEndAt() {
-        return endAt;
+    public LocalTime getEndTime() {
+        return endTime;
+    }
+
+    public Integer getDurationMinutes() {
+        return durationMinutes;
+    }
+
+    private Integer calculateDurationMinutes(LocalTime start, LocalTime end) {
+        return (int) java.time.Duration.between(start, end).toMinutes();
     }
 }
