@@ -14,7 +14,8 @@ Users can create tasks, set their properties, and generate a planned weekly sche
 The system's design highlights:
 
 - A domain planner that encapsulates the core planning logic
-- A layered architecture (JavaFX UI → Domain → Repository → DAO → Database)
+- A layered architecture (JavaFX UI → Repository → DAO → Database)
+- A domain layer with classes that hold no reference to the other layers to provide domain language and logic to the system
 
 ---
 
@@ -117,8 +118,6 @@ The application has demonstrated a working flow from the UI → Application → 
 - **Build Tool:** Maven
 - **Architecture:** Layered architecture with domain-driven design principles
 - **Future:** Docker
-
----
 
 ---
 
