@@ -122,6 +122,110 @@ The application has demonstrated a working flow from the UI → Application → 
 
 ---
 
+## 🧪 How to Exercise the Use Cases
+
+Run through this checklist when validating the project. Each section provides specific commands to test different aspects of the application.
+
+### 🚀 Quick Start
+
+```bash
+# 1. Initialize the database and launch the GUI
+./mvnw javafx:run
+```
+
+### 🎯 Core Use Cases Testing
+
+#### **Task Management**
+
+```bash
+# Test adding tasks through the GUI (full UI → Database flow)
+./mvnw clean javafx:run
+# Then use the "Add Task" form to create tasks and verify persistence
+```
+
+```bash
+# Test the calendar visualisation using the console app
+java -cp "target/classes:$(./mvnw dependency:build-classpath -Dmdep.outputFile=/dev/stdout -q)" com.example.weeklyplanner.console.WeeklyPlanConsoleDemo
+```
+
+
+#### **Weekly Planning Algorithm**
+
+```bash
+# Test the core planning logic independently
+java -cp "target/classes:$(./mvnw dependency:build-classpath -Dmdep.outputFile=/dev/stdout -q)" org.junit.runner.JUnitCore com.example.weeklyplanner.test.application.TestPlanWeekService
+```
+
+
+
+#### **Task Viewing & Backlog Management**
+
+```bash
+# Test backlog retrieval
+java -cp "target/classes:$(./mvnw dependency:build-classpath -Dmdep.outputFile=/dev/stdout -q)" org.junit.runner.JUnitCore com.example.weeklyplanner.test.application.TestViewBacklogService
+
+# Test weekly calendar view
+java -cp "target/classes:$(./mvnw dependency:build-classpath -Dmdep.outputFile=/dev/stdout -q)" org.junit.runner.JUnitCore com.example.weeklyplanner.test.application.TestViewCurrentWeeklyCalendarService
+```
+
+### 🔧 Infrastructure & Persistence Testing
+
+#### **Database Operations**
+
+```bash
+# Test database connectivity and task retrieval
+java -cp "target/classes:$(./mvnw dependency:build-classpath -Dmdep.outputFile=/dev/stdout -q)" org.junit.runner.JUnitCore com.example.weeklyplanner.test.persistence.db.TestDatabase
+
+# Test repository integration
+java -cp "target/classes:$(./mvnw dependency:build-classpath -Dmdep.outputFile=/dev/stdout -q)" org.junit.runner.JUnitCore com.example.weeklyplanner.test.persistence.repository.PlanEntryRepositoryIntegrationTest
+```
+
+#### **Data Mapping & Transformation**
+
+```bash
+# Test entity-to-domain mapping
+java -cp "target/classes:$(./mvnw dependency:build-classpath -Dmdep.outputFile=/dev/stdout -q)" org.junit.runner.JUnitCore com.example.weeklyplanner.test.persistence.mapper.PlanEntryMapperTest
+java -cp "target/classes:$(./mvnw dependency:build-classpath -Dmdep.outputFile=/dev/stdout -q)" org.junit.runner.JUnitCore com.example.weeklyplanner.test.persistence.mapper.UserPreferenceMapperTest
+java -cp "target/classes:$(./mvnw dependency:build-classpath -Dmdep.outputFile=/dev/stdout -q)" org.junit.runner.JUnitCore com.example.weeklyplanner.test.persistence.mapper.WeeklyPlanMapperTest
+```
+
+#### **Repository Layer**
+
+```bash
+# Test weekly plan repository
+java -cp "target/classes:$(./mvnw dependency:build-classpath -Dmdep.outputFile=/dev/stdout -q)" org.junit.runner.JUnitCore com.example.weeklyplanner.test.persistence.repository.WeeklyPlanRepositoryTest
+
+# Test user preference repository
+java -cp "target/classes:$(./mvnw dependency:build-classpath -Dmdep.outputFile=/dev/stdout -q)" org.junit.runner.JUnitCore com.example.weeklyplanner.test.persistence.repository.UserPreferenceRepositoryTest
+```
+
+### 🔄 Complete Test Suite
+
+```bash
+# Run all tests to verify the entire system (ordered by architecture layers)
+java -cp "target/classes:$(./mvnw dependency:build-classpath -Dmdep.outputFile=/dev/stdout -q)" org.junit.runner.JUnitCore com.example.weeklyplanner.test.persistence.db.TestDatabase com.example.weeklyplanner.test.persistence.repository.PlanEntryRepositoryIntegrationTest com.example.weeklyplanner.test.persistence.mapper.PlanEntryMapperTest com.example.weeklyplanner.test.persistence.mapper.UserPreferenceMapperTest com.example.weeklyplanner.test.persistence.mapper.WeeklyPlanMapperTest com.example.weeklyplanner.test.persistence.repository.WeeklyPlanRepositoryTest com.example.weeklyplanner.test.persistence.repository.UserPreferenceRepositoryTest com.example.weeklyplanner.test.application.TestViewBacklogService com.example.weeklyplanner.test.application.TestPlanWeekService com.example.weeklyplanner.test.application.TestViewCurrentWeeklyCalendarService
+
+# Run individual test suites
+java -cp "target/classes:$(./mvnw dependency:build-classpath -Dmdep.outputFile=/dev/stdout -q)" org.junit.runner.JUnitCore com.example.weeklyplanner.test.application.TestPlanWeekService
+java -cp "target/classes:$(./mvnw dependency:build-classpath -Dmdep.outputFile=/dev/stdout -q)" org.junit.runner.JUnitCore com.example.weeklyplanner.test.application.TestViewBacklogService
+java -cp "target/classes:$(./mvnw dependency:build-classpath -Dmdep.outputFile=/dev/stdout -q)" org.junit.runner.JUnitCore com.example.weeklyplanner.test.persistence.db.TestDatabase
+```
+
+### 🗄️ Database Inspection
+
+```bash
+# Initialize/reset the database
+java -cp "target/classes:$(./mvnw dependency:build-classpath -Dmdep.outputFile=/dev/stdout -q)" com.example.weeklyplanner.persistence.db.DatabaseInitializer
+
+# Inspect SQLite database (if sqlite3 is installed)
+sqlite3 planner-database
+.tables
+SELECT * FROM task;
+SELECT * FROM weekly_plan;
+SELECT * FROM user_preference;
+.quit
+```
+
 ## Notes
 
 This submission prioritizes architecture quality, extensibility, and domain design clarity over visual polish. The codebase demonstrates my approach to incremental feature development, clean abstraction, and maintainable OOP design under time constraints.
